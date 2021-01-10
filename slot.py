@@ -50,6 +50,6 @@ class slot:
             y = self._number()
             z = self._number()
             self._bet = False
-            return x, y, z
+            return 7, 7, z
         else:
             print('you must bet to play')
