@@ -9,48 +9,48 @@ class Gui (tk.Frame):
     def __init__(self, master):
         # next line require for blink function
         tk.Frame.__init__(self, master)
-        super().__init__()
         self.master = master
         self._slot = s.slot()
         self._prize = p.prize()
         
-        jackpot_frame = tk.Frame(self.master)
-        jackpot_frame.pack()
-        
-        self.label_jackpot = tk.Label(jackpot_frame, text=self._slot._get_jackpot())
-        self.label_jackpot.pack(side="right")
+        # INFORMATION FRAME
+        jackpot_frame = tk.Frame(self.master, borderwidth=0)
+        jackpot_frame.place(x=0, y=0, height=30, width=250)
 
-        self.label_jackpot_text = tk.Label(jackpot_frame, text="JACKPOT", foreground="red")
-        self.label_jackpot_text.pack(side="left")
+        self.label_jackpot_text = tk.Label(jackpot_frame, text="JACKPOT", foreground="red", background="blue")
+        self.label_jackpot_text.place(x=0, y=0, height=30, width=125)
         self.blink()
 
-        label_frame = tk.Frame(self.master)
-        label_frame.pack()
+        self.label_jackpot = tk.Label(jackpot_frame, text=f"$ {self._slot._get_jackpot()}", background="White", foreground="red")
+        self.label_jackpot.place(x=125, y=0, height=30, width=125)
+
+
+        # GAME FRAME
+        label_frame = tk.Frame(self.master, borderwidth=0)
+        label_frame.place(x=0, y=30, height=80, width=250)
 
         self.button_bet = tk.Button(label_frame, text="BET", command=self.bet)
-        self.button_bet.pack(side="left")
+        self.button_bet.place(x=0, y=0, height=80, width=50)
 
         self.label_1 = tk.Label(label_frame, text="0")
-        self.label_1.pack(side="left")
+        self.label_1.place(x=50, y=0, height=80, width=50)
         
         self.label_2 = tk.Label(label_frame, text="0")
-        self.label_2.pack(side="left")
+        self.label_2.place(x=100, y=0, height=80, width=50)
         
         self.label_3 = tk.Label(label_frame, text="0")
-        self.label_3.pack(side="left")
+        self.label_3.place(x=150, y=0, height=80, width=50)
 
         self.button_play = tk.Button(label_frame, text="PLAY", state="disabled", command=self.play)
-        self.button_play.pack(side="right")
+        self.button_play.place(x=200, y=0, height=80, width=50)
 
-        image_frame = tk.Frame (self.master)
-        image_frame.pack(side="bottom")
-
+        # IMAGE FRAME
         self._image_file = Image.open("/home/rick/python/juegos/lucky7/src/images/main.png")
         self._image_file = self._image_file.resize((250,120))
         self._tkimage = ImageTk.PhotoImage(self._image_file)
 
         self.image = tk.Label(image=self._tkimage)
-        self.image.pack(side="bottom")
+        self.image.place(x=0, y=110, height=120, width=250)
 
     def start(self):
         self.master.mainloop()
@@ -61,7 +61,7 @@ class Gui (tk.Frame):
         # disabled bet button after "coin" is inserted
         self.button_bet["state"] = "disabled"
         # update jackpot value
-        self.label_jackpot["text"] = self._slot._get_jackpot()
+        self.label_jackpot["text"] = f"$ {self._slot._get_jackpot()}"
         # enable play button
         self.button_play["state"] = "active"
     
@@ -97,5 +97,8 @@ class Gui (tk.Frame):
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.geometry("250x230")
+    root.title("Luck 7")
+    root.resizable(width=False, height=False)
     gui = Gui(root)
     gui.start()
