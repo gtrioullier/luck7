@@ -6,13 +6,14 @@ class prize:
         # 25 (coin) may be replaced by bet in future releases
         self._seven = 25 * 7
         self._double_seven = 25 * pow(7, 2)
-        self._triple_seven = s.slot._get_jackpot(self)
 
     def small_prize (self):
+        s.slot()._set_jackpot(s.slot()._get_jackpot() - self._seven)
         return self._seven
     
     def double_prize (self):
+        s.slot()._set_jackpot(s.slot()._get_jackpot() - self._double_seven)
         return self._double_seven
-    
+
     def big_prize (self):
-        return self._triple_seven
+        return s.slot()._get_jackpot()
