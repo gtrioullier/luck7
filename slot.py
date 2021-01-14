@@ -63,6 +63,9 @@ class slot:
         return randrange(10)
     
     def _check_min_jackpot(self, pot):
+        """
+        Private method to check minimun jackpot amount
+        """
         if pot < self._min_jackpot:
             self._set_jackpot(self._min_jackpot)
         else:
@@ -83,6 +86,5 @@ class slot:
             self._bet = False
             self._set_last_run(x, y, z)  
             return x, y, z
-        
         else:
             print('you must bet to play')

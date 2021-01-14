@@ -9,16 +9,16 @@ from pygame import mixer as mx
 
 class Gui (tk.Frame):
     def __init__(self, master):
-        # next line require for blink function
         tk.Frame.__init__(self, master)
         mx.init(4100)
         self.master = master
+        self._path = "/home/rick/python/juegos/lucky7/src"
         self._slot = s.slot()
         self._prize = p.prize()
         self._button_bg_active = "#fbff24"
         self._button_bg_disabled = "#f9fabb"
-        self._openning_sound = mx.Sound("/home/rick/python/juegos/lucky7/src/sounds/slot2.wav")
-        self._bet_sound = mx.Sound("/home/rick/python/juegos/lucky7/src/sounds/coin.wav")
+        self._openning_sound = mx.Sound(self._path + "/sounds/slot2.wav")
+        self._bet_sound = mx.Sound(self._path + "/sounds/coin.wav")
         self._openning_sound.play()
         self._X, self._Y, self._Z = self._slot._get_last_run()
 
@@ -114,7 +114,7 @@ class Gui (tk.Frame):
         self.button_play.place(x=197, y=0, height=80, width=53)
 
         # IMAGE FRAME
-        self._image_file = Image.open("/home/rick/python/juegos/lucky7/src/images/main.png")
+        self._image_file = Image.open(self._path + "/images/main.png")
         self._image_file = self._image_file.resize((250,120))
         self._tkimage = ImageTk.PhotoImage(self._image_file)
 
